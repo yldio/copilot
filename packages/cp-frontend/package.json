@@ -26,7 +26,7 @@
     "force-array": "^3.1.0",
     "graphql-tag": "^2.4.2",
     "jest-cli": "^20.0.4",
-    "joyent-manifest-editor": "^1.1.0",
+    "joyent-manifest-editor": "^1.2.1",
     "joyent-ui-toolkit": "^1.2.0",
     "js-yaml": "^3.9.1",
     "lodash.find": "^4.6.0",
