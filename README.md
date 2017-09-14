@@ -1,7 +1,7 @@
-![CoPilot Logo](./copilot.png)
+![CoPilot Logo](./assets/logo_dark.png)
 
 
-[![CircleCI](https://img.shields.io/circleci/project/github/yldio/joyent-portal/master.svg)](https://circleci.com/gh/yldio/joyent-portal)
+[![CircleCI](https://img.shields.io/circleci/project/github/yldio/copilot/master.svg)](https://circleci.com/gh/yldio/copilot)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)
 

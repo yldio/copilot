@@ -1,9 +1,9 @@
 {
-  "name": "container-pilot-dashboard",
+  "name": "copilot",
   "version": "1.0.0",
   "private": true,
   "license": "MPL-2.0",
-  "repository": "github:yldio/joyent-portal",
+  "repository": "github:yldio/copilot",
   "scripts": {
     "wizard": "lerna-wizard",
     "release": "./scripts/release",
@@ -14,7 +14,7 @@
     "lint-license": "./scripts/license-to-fail",
     "lint-docs": "./scripts/quality-docs",
     "lint-ci:root":
-      "echo 0 `# eslint scripts/* --format junit --output-file $CIRCLE_TEST_REPORTS/lint/container-pilot-dashboard.xml`",
+      "echo 0 `# eslint scripts/* --format junit --output-file $CIRCLE_TEST_REPORTS/lint/copilot.xml`",
     "lint:root": "echo 0 `# eslint scripts/* --fix`",
     "lint-ci:packages": "lerna run lint-ci",
     "lint:packages": "lerna run lint",
