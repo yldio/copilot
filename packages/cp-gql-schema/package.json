@@ -2,7 +2,7 @@
   "name": "joyent-cp-gql-schema",
   "version": "1.7.0",
   "license": "MPL-2.0",
-  "repository": "github:yldio/joyent-portal",
+  "repository": "github:yldio/copilot",
   "main": "index.js",
   "scripts": {
     "lint": "eslint . --fix",
@@ -14,6 +14,6 @@
   "dependencies": {},
   "devDependencies": {
     "eslint": "^4.5.0",
-    "eslint-config-joyent-portal": "3.0.0"
+    "eslint-config-copilot": "3.0.0"
   }
 }

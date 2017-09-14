@@ -1,4 +1,4 @@
-# joyent-portal-gql-cp-schema
+# copilot-gql-cp-schema
 
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg)](https://github.com/RichardLitt/standard-readme)
@@ -14,13 +14,13 @@
 ## Install
 
 ```
-yarn add --dev joyent-portal-gql-cp-schema
+yarn add --dev copilot-gql-cp-schema
 ```
 
 ## Usage
 
 ```js
-const containerPilotSchema = require('joyent-portal-gql-cp-schema');
+const containerPilotSchema = require('copilot-gql-cp-schema');
 
 containerPilotSchema().then((schema) => console.log(schema))
 ```

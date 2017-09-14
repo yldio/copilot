@@ -3,7 +3,7 @@
   "version": "1.0.4",
   "private": true,
   "license": "MPL-2.0",
-  "repository": "github:yldio/joyent-portal",
+  "repository": "github:yldio/copilot",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint . --fix",
@@ -39,7 +39,7 @@
     "ava": "^0.22.0",
     "delay": "^2.0.0",
     "eslint": "^4.5.0",
-    "eslint-config-joyent-portal": "3.0.0",
+    "eslint-config-copilot": "3.0.0",
     "execa": "^0.8.0",
     "lodash.sortby": "^4.7.0",
     "mz": "^2.6.0",
