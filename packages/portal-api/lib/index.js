@@ -49,8 +49,10 @@ module.exports = function (server, options, next) {
   settings.data.server = server;
 
   const data = new Data(settings.data);
-  const cpWatcher = new ContainerPilotWatcher(Object.assign(settings.watch, { data }));
-  const machinesWatcher = new MachinesWatcher(Object.assign(settings.watch, { data }));
+  const watcherOptions = settings.watch;
+  watcherOptions.data = data;
+  const cpWatcher = new ContainerPilotWatcher(watcherOptions);
+  const machinesWatcher = new MachinesWatcher(watcherOptions);
 
   // watcher <-> watcher
   // portal depends on watcher and vice-versa

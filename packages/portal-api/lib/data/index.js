@@ -263,7 +263,7 @@ class Data extends EventEmitter {
   // datacenters
 
   createDatacenter (datacenter, cb) {
-    this._db.datacenters.insert(datacenter, (err, key) => {
+    this._db.datacenters.insert(datacenter, { merge: true }, (err, key) => {
       if (err) {
         return cb(err);
       }

@@ -6,11 +6,32 @@
       exec: '/bin/prestart.sh'
     },
     {
-      name: 'bootstrap',
-      exec: 'node bootstrap-data.js',
+      name: 'consul-agent',
+      exec: ['/usr/local/bin/consul', 'agent',
+                  '-data-dir=/data',
+                  '-config-dir=/config',
+                  '-log-level=err',
+                  '-rejoin',
+                  '-retry-join', '{{ .CONSUL | default "consul" }}',
+                  '-retry-max', '20',
+                  '-retry-interval', '5s'],
+      restarts: 'unlimited',
+      "health": {
+        "exec": "curl -so /dev/null http://localhost:8500",
+        "interval": 10,
+        "ttl": 25
+      },
       when: {
         source: 'setup-config',
         once: 'exitSuccess'
+      }
+    },
+    {
+      name: 'bootstrap',
+      exec: 'node bootstrap-data.js',
+      when: {
+        source: 'consul-agent',
+        once: 'healthy'
       }
     },
     {
@@ -26,18 +47,6 @@
         source: 'bootstrap',
         once: 'exitSuccess'
       },
-      restarts: 'unlimited'
-    },
-    {
-      name: 'consul-agent',
-      exec: ['/usr/local/bin/consul', 'agent',
-                  '-data-dir=/data',
-                  '-config-dir=/config',
-                  '-log-level=err',
-                  '-rejoin',
-                  '-retry-join', '{{ .CONSUL | default "consul" }}',
-                  '-retry-max', '20',
-                  '-retry-interval', '5s'],
       restarts: 'unlimited'
     },
     {

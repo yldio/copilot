@@ -186,24 +186,15 @@ module.exports = class ContainerPilotWatcher extends Events {
 
     const fetchStatus = (ip, next) => {
       Wreck.get(`http://${ip}:9090/status`, {
-        timeout: 1000 // 1s
-      }, (err, res, payload) => {
+        timeout: 2000,    // 2 seconds
+        json: 'force'
+      }, (err, res, status) => {
         if (err) {
           this.emit('error', err);
           return next();
         }
 
-        if (Buffer.isBuffer(payload)) {
-          payload = payload.toString();
-        }
-
-        try {
-          const status = JSON.parse(payload);
-          next(null, status);
-        } catch (err) {
-          this.emit('error', err);
-          next();
-        }
+        next(null, status);
       });
     };
 
