@@ -73,13 +73,9 @@ const bootstrap = function ({ docker, rethink }, cb) {
       return cb(err);
     }
 
-    data.getDatacenters((err, datacenters) => {
-      if (err) {
-        return cb(err);
-      }
-
+    data.getPortal({}, (err, portal) => {
       // Don't continue since data is already bootstrapped
-      if (datacenters && datacenters.length) {
+      if (portal) {
         return cb();
       }
 
@@ -98,16 +94,12 @@ const bootstrap = function ({ docker, rethink }, cb) {
             return cb(err);
           }
 
-          cloudapi.getAccount((err, {
-            id,
-            firstName,
-            lastName,
-            email,
-            login
-          }) => {
+          cloudapi.getAccount({}, (err, body) => {
             if (err) {
               return cb(err);
             }
+
+            const { id, firstName, lastName, email, login } = body;
 
             data.createUser({
               tritonId: id,

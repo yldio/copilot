@@ -16,8 +16,6 @@ consul:
       -ui-dir /ui
   restart: always
   mem_limit: 128m
-  labels:
-    - triton.cns.services=copilot-consul
   ports:
     - 8500:8500
 
@@ -33,82 +31,80 @@ prometheus:
   mem_limit: 1g
   ports:
     - 9090:9090
-  labels:
-    # This label sets the CNS name, Triton's automatic DNS
-    # Learn more at https://docs.joyent.com/public-cloud/network/cns
-    - triton.cns.services=prometheus
-    # This label selects the proper Joyent resource package
-    # https://www.joyent.com/blog/optimizing-docker-on-triton#ram-cpu-and-disk-resources-for-your-containers
-    - com.joyent.package=g4-highcpu-1G
-  env_file:
-    - _env
+  links:
+    - consul:consul
   environment:
+    - CONSUL=consul
     - CONSUL_AGENT=1
-
-
-rethinkdb:
-  image: autopilotpattern/rethinkdb:2.3.5r1
-  restart: always
-  mem_limit: 1g
-  env_file:
-    - _env
-  environment:
-    - CONSUL_AGENT=1
-  expose:
-    - 28015
-    - 29015
+  dns:
+    - 127.0.0.1
 
 
 #############################################################################
 #  FRONTEND
 #############################################################################
 frontend:
-  image: joyent/copilot-frontend:1.3.4
+  build: docker/frontend
   mem_limit: 512m
-  labels:
-    - triton.cns.services=copilot
+  links:
+    - consul:consul
   env_file:
     - _env
   environment:
+    - CONSUL=consul
     - PORT=443
   ports:
     - "80:80"
     - "443:443"
-  restart: always
+  dns:
+    - 127.0.0.1
 
 
 #############################################################################
 #  BACKEND
 #############################################################################
 api:
-  image: joyent/copilot-api:1.8.8
-  mem_limit: 1g
-  expose:
-    - 3000
+  build: docker/api
+  mem_limit: 512m
+  links:
+    - consul:consul
   env_file:
     - _env
   environment:
+    - CONSUL=consul
     - PORT=3000
-  restart: always
+  expose:
+    - 3000
 
 # Docker-compose wrapper
 # Create _env file from running ./setup.sh
 compose-api:
-  image: joyent/copilot-compose:1.1.0
+  build: docker/compose-api
+  links:
+    - consul:consul
   expose:
     - 4242
   env_file:
     - _env
+  environment:
+    - CONSUL=consul
   restart: always
 
 rethinkdb:
-  image: autopilotpattern/rethinkdb:2.3.5r2
+  image: autopilotpattern/rethinkdb:2.3.5r1
   restart: always
   mem_limit: 1g
+  links:
+    - consul:consul
   env_file:
     - _env
   environment:
+    - CONSUL=consul
     - CONSUL_AGENT=1
+  ports:
+    - 8080:8080
   expose:
     - 28015
     - 29015
+  dns:
+    - 127.0.0.1

@@ -51,32 +51,35 @@ $ ./setup.sh ~/path/to/TRITON_PRIVATE_KEY keys-test.com/ca.crt keys-test.com/ser
 
 ## Usage
 
-You have 3 options for where to run CoPilot. You can either run it using the published docker images locally, or on Triton. The last option is to build the docker images and run docker containers from these locally built images.
+You have 3 options for where to run CoPilot. You can either run it using the published docker images on Triton or locally. The last option is to build the docker images and run docker containers from these locally built images.
+
+
+### Deploy and run CoPilot on Triton
+
+Optionally use [_triton-docker_](https://github.com/joyent/triton-docker-cli)
+```sh
+$ triton-compose up -d
+```
+
+Or use `docker-compose` with preconfigured Triton environment variables
+```sh
+$ docker-compose up -d
+```
+
 
 ### Start CoPilot using published docker images locally
 
 ```sh
-$ docker-compose up -d
+$ docker-compose -f local-compose.yml up -d
 ```
 
 Navigate to [https://localhost]() to load the dashboard.
 
 
-### Deploy and run CoPilot on Triton
+### Build and run CoPilot locally for development
 
 ```sh
-$ docker-compose -f triton-compose.yml up -d
-```
-
-Optionally use [_triton-docker_](https://github.com/joyent/triton-docker-cli)
-```sh
-$ triton-compose -f triton-compose.yml up -d
-```
-
-### Build and run CoPilot locally
-
-```sh
-$ docker-compose -f local-compose.yml up -d
+$ docker-compose -f dev-compose.yml up -d
 ```
 
 ## Contribute

@@ -1,6 +1,6 @@
 {
   "name": "portal-api",
-  "version": "1.8.8",
+  "version": "1.8.9",
   "description": "",
   "main": "./lib/index.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "hapi": "^16.5.2",
     "lab": "^14.2.2",
     "lodash.findindex": "^4.6.0",
-    "wreck": "^12.4.0"
+    "wreck": "^12.5.0"
   },
   "dependencies": {
     "boom": "^5.2.0",
