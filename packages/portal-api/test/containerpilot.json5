@@ -24,7 +24,7 @@
       interval: 5
     },
     {
-      name: 'docker-compose-api',
+      name: 'compose-api',
       interval: 5
     }
   ]

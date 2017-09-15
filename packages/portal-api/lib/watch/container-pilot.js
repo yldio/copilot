@@ -132,24 +132,26 @@ module.exports = class ContainerPilotWatcher extends Events {
         return Name !== 'containerpilot';
       });
 
-      cb(null, Object.assign({}, instance, {
-        cp: Object.assign({}, status, {
-          Services: services
-        })
-      }));
+      instance.cp = {
+        status,
+        Services: services
+      };
+
+      cb(null, instance);
     };
 
     const fetchStatus = (ip) => {
-      Wreck.get(`http://${ip}:9090/status`, {
-        timeout: 2000,    // 2 seconds
-        json: 'force'
-      }, (err, res, status) => {
-        if (err) {
-          this.emit('error', err);
-          return cb();
-        }
+      return new Promise((resolve, reject) => {
+        Wreck.get(`http://${ip}:9090/status`, {
+          timeout: 2000,    // 2 seconds
+          json: 'force'
+        }, (err, res, status) => {
+          if (err) {
+            return reject(err);
+          }
 
-        handleStatus(status);
+          resolve(status);
+        });
       });
     };
 
@@ -159,11 +161,21 @@ module.exports = class ContainerPilotWatcher extends Events {
         return cb();
       }
 
-      if (!machine) {
-        return cb();
+      if (!machine || !Array.isArray(machine.ips)) {
+        return cb(null, instance);
       }
 
-      fetchStatus(machine.primaryIp);
+      machine.ips.find(async (ip) => {
+        try {
+          const status = await fetchStatus(ip);
+          return handleStatus(status);
+        } catch (ex) {
+          this.emit('error', err);
+          return;
+        }
+      });
+
+      return cb(null, instance);
     });
   }
 
@@ -288,11 +300,7 @@ module.exports = class ContainerPilotWatcher extends Events {
   }
 
   static _resolveInstanceHealth ({ name }, instance) {
-    if (!instance) {
-      return 'UNAVAILABLE';
-    }
-
-    if (!instance.cp) {
+    if (!instance || !instance.cp) {
       return 'UNAVAILABLE';
     }
 
@@ -306,7 +314,7 @@ module.exports = class ContainerPilotWatcher extends Events {
       return serviceJobs.shift().Status.toUpperCase();
     }
 
-    const almostJobNameRegexp = new RegExp(`${name}-.*`);
+    const almostJobNameRegexp = new RegExp(`${name}`, 'ig');
     const almostServiceJobs = jobNames.filter(({ Name }) => {
       return almostJobNameRegexp.test(Name);
     });

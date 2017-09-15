@@ -27,7 +27,7 @@
       },
     },
     {
-      name: 'cp-frontend',
+      name: 'frontend',
       port: {{.PORT}},
       exec: 'nginx',
       interfaces: ["eth0", "eth1"],

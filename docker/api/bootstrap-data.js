@@ -10,7 +10,7 @@ const Url = require('url');
 
 let timeoutId;
 const loadConfig = function () {
-  const docker = Piloted.service('docker-compose-api');
+  const docker = Piloted.service('compose-api');
   const rethink = Piloted.service('rethinkdb');
 
   const retry = () => {

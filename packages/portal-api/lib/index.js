@@ -32,7 +32,7 @@ module.exports = function (server, options, next) {
   const settings = Hoek.applyToDefaults(internals.defaults, options || {});
 
   try {
-    const docker = Piloted.service('docker-compose-api');
+    const docker = Piloted.service('compose-api');
     if (docker) {
       settings.data.dockerComposeHost = `tcp://${docker.address}:${docker.port}`;
     }
@@ -106,7 +106,7 @@ module.exports.attributes = {
 
 internals.refresh = function (data) {
   return () => {
-    const docker = Piloted.service('docker-compose-api');
+    const docker = Piloted.service('compose-api');
     if (docker) {
       data.reconnectCompose(`tcp://${docker.address}:${docker.port}`);
     }
