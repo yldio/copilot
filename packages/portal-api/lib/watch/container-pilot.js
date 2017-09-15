@@ -120,55 +120,10 @@ module.exports = class ContainerPilotWatcher extends Events {
     this._data.getPortal({}, getDeploymentGroups);
   }
 
-  _getNetworks (networkIds = [], cb) {
-    VAsync.forEachParallel({
-      inputs: networkIds,
-      func: (id, next) => {
-        this._triton.getNetwork(id, next);
-      }
-    }, (err, results) => {
-      cb(err, ForceArray((results || {}).successes));
-    });
-  }
-
-  _getPublicIps (machine, cb) {
-    this._getNetworks(machine.networks, (err, networks) => {
-      if (err) {
-        return cb(err);
-      }
-
-      const privateNetworkSubnets = networks
-        .filter((network) => {
-          return !network['public'];
-        })
-        .map((network) => {
-          return network.subnet;
-        })
-        .filter(Boolean);
-
-      const cidr = new CIDRMatcher(privateNetworkSubnets);
-
-      const nonPrivateIps = machine.ips.filter((ip) => {
-        return !cidr.contains(ip);
-      });
-
-      cb(null, nonPrivateIps);
-    });
-  }
-
   _fetchInstanceStatus (instance, cb) {
     const { machineId } = instance;
 
-    const handleStatuses = (err, results) => {
-      if (err) {
-        this.emit('error', err);
-        return cb();
-      }
-
-      const statuses = ForceArray((results || {}).successes);
-
-      const status = statuses.filter(Boolean).shift();
-
+    const handleStatus = (status) => {
       if (!status) {
         return cb(null, instance);
       }
@@ -184,30 +139,18 @@ module.exports = class ContainerPilotWatcher extends Events {
       }));
     };
 
-    const fetchStatus = (ip, next) => {
+    const fetchStatus = (ip) => {
       Wreck.get(`http://${ip}:9090/status`, {
         timeout: 2000,    // 2 seconds
         json: 'force'
       }, (err, res, status) => {
         if (err) {
           this.emit('error', err);
-          return next();
+          return cb();
         }
 
-        next(null, status);
+        handleStatus(status);
       });
-    };
-
-    const handlePublicIps = (err, ips) => {
-      if (err) {
-        this.emit('error', err);
-        return cb();
-      }
-
-      VAsync.forEachParallel({
-        inputs: ips,
-        func: fetchStatus
-      }, handleStatuses);
     };
 
     this._triton.getMachine(machineId, (err, machine) => {
@@ -216,7 +159,11 @@ module.exports = class ContainerPilotWatcher extends Events {
         return cb();
       }
 
-      this._getPublicIps(machine, handlePublicIps);
+      if (!machine) {
+        return cb();
+      }
+
+      fetchStatus(machine.primaryIp);
     });
   }
 
