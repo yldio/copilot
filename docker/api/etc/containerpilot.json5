@@ -89,7 +89,7 @@
       name: 'onchange-compose-api',
       exec: 'pkill -SIGHUP node',
       when: {
-        source: 'watch.docker-compose-api',
+        source: 'watch.compose-api',
         each: 'changed'
       }
     },
@@ -104,7 +104,7 @@
   ],
   watches: [
     {
-      name: 'docker-compose-api',
+      name: 'compose-api',
       interval: 3
     },
     {

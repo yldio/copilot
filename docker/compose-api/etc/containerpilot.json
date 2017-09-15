@@ -6,7 +6,7 @@
       "exec": "/bin/prestart.sh"
     },
     {
-      "name": "docker-compose-api",
+      "name": "compose-api",
       "port": 4242,
       "exec": [
         "python",
