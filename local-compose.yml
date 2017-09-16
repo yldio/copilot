@@ -66,7 +66,7 @@ frontend:
 #  BACKEND
 #############################################################################
 api:
-  image: joyent/copilot-api:1.8.11
+  image: joyent/copilot-api:1.8.12
   mem_limit: 512m
   links:
     - consul:consul
