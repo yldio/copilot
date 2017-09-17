@@ -20,6 +20,8 @@ consul:
     - triton.cns.services=copilot-consul
   ports:
     - 8500:8500
+  expose:
+    - 9090
 
 #############################################################################
 #  PROMETHEUS
@@ -46,19 +48,6 @@ prometheus:
     - CONSUL_AGENT=1
 
 
-rethinkdb:
-  image: autopilotpattern/rethinkdb:2.3.5r1
-  restart: always
-  mem_limit: 1g
-  env_file:
-    - _env
-  environment:
-    - CONSUL_AGENT=1
-  expose:
-    - 28015
-    - 29015
-
-
 #############################################################################
 #  FRONTEND
 #############################################################################
@@ -74,6 +63,8 @@ frontend:
   ports:
     - "80:80"
     - "443:443"
+  expose:
+    - 9090
   restart: always
 
 
@@ -81,14 +72,17 @@ frontend:
 #  BACKEND
 #############################################################################
 api:
-  image: joyent/copilot-api:1.8.12
+  image: joyent/copilot-api:1.8.15
   mem_limit: 1g
   expose:
     - 3000
+    - 9090
   env_file:
     - _env
   environment:
     - PORT=3000
+  ports:
+    - "8080:8080"
   restart: always
 
 # Docker-compose wrapper
@@ -97,6 +91,7 @@ compose-api:
   image: joyent/copilot-compose:1.1.1
   expose:
     - 4242
+    - 9090
   env_file:
     - _env
   restart: always
@@ -112,3 +107,4 @@ rethinkdb:
   expose:
     - 28015
     - 29015
+    - 9090
