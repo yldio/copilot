@@ -64,7 +64,7 @@ module.exports = class MachineWatcher {
     // todo assert options
     this._data = options.data;
     this._server = options.server;
-    this._frequency = 200;
+    this._frequency = 500;
 
     this._tritonWatch = new TritonWatch({
       frequency: this._frequency,
@@ -166,7 +166,7 @@ module.exports = class MachineWatcher {
   }
 
   createInstance ({ deploymentGroup, machine, instances, service }, cb) {
-    this._server.log(['debug', 'error'], `-> detected that machine ${machine.name} was created`);
+    this._server.log(['debug'], `-> detected that machine ${machine.name} was created`);
 
     const status = (machine.state || '').toUpperCase();
 
@@ -199,7 +199,7 @@ module.exports = class MachineWatcher {
   }
 
   updateInstance ({ machine, instance, instances, service }, cb) {
-    console.error(`-> detected that machine ${machine.name} was updated`);
+    this._server.log(['debug'], `-> detected that machine ${machine.name} was updated`);
 
     const updatedInstance = {
       id: instance.id,
@@ -231,7 +231,7 @@ module.exports = class MachineWatcher {
   }
 
   resolveChange ({ deploymentGroup, version, service, instances, machine }, cb) {
-    console.error(`-> resolving change for machine ${machine.name}`);
+    this._server.log(['debug'], `-> resolving change for machine ${machine.name}`);
 
     const SERVICE_STATUS = Get(service, 'status', 'UNKNOWN').toUpperCase();
     const MACHINE_STATUS = Get(machine, 'state', 'UNKNOWN').toUpperCase();
@@ -239,7 +239,7 @@ module.exports = class MachineWatcher {
     const hasPlan = Boolean(Get(version, 'plan.hasPlan', true));
     const serviceName = service.name;
 
-    console.error(`-> detected meta for machine ${machine.name} ${Util.inspect({
+    this._server.log(['debug'],`-> detected meta for machine ${machine.name} ${Util.inspect({
       SERVICE_STATUS,
       MACHINE_STATUS,
       hasPlan,
@@ -248,13 +248,13 @@ module.exports = class MachineWatcher {
 
     const ActionResolvers = {
       '_CREATE_OR_REMOVE': (action, cb) => {
-        console.error(`-> got _CREATE_OR_REMOVE action for "${machine.name}"`);
+        this._server.log(['debug'], `-> got _CREATE_OR_REMOVE action for "${machine.name}"`);
 
         let processed = ForceArray(action.processed);
         const completed = processed.length === action.toProcess;
 
         if (completed) {
-          console.error('-> action was already completed');
+          this._server.log(['debug'], '-> action was already completed');
           return cb(null, {
             action,
             completed: true
@@ -262,7 +262,7 @@ module.exports = class MachineWatcher {
         }
 
         if (processed.indexOf(machine.id) >= 0) {
-          console.error('-> machine was already processed');
+          this._server.log(['debug'], '-> machine was already processed');
           return cb(null, {
             action,
             completed
@@ -279,7 +279,7 @@ module.exports = class MachineWatcher {
         });
       },
       'NOOP': (action, cb) => {
-        console.error(`-> got NOOP action for "${machine.name}"`);
+        this._server.log(['debug'], `-> got NOOP action for "${machine.name}"`);
 
         cb(null, {
           action,
@@ -289,10 +289,10 @@ module.exports = class MachineWatcher {
       // scenarios: scale down or removed service
       // so far, the logic is the same for CREATE and REMOVE
       'REMOVE': (action, cb) => {
-        console.error(`-> got REMOVE action for "${machine.name}"`);
+        this._server.log(['debug'], `-> got REMOVE action for "${machine.name}"`);
 
         if (ACTION_REMOVE_STATUSES.indexOf(MACHINE_STATUS) < 0) {
-          console.error(`-> since "${machine.name}" is "${MACHINE_STATUS}", nothing to do here`);
+          this._server.log(['debug'], `-> since "${machine.name}" is "${MACHINE_STATUS}", nothing to do here`);
 
           return cb(null, {
             action,
@@ -301,7 +301,7 @@ module.exports = class MachineWatcher {
         }
 
         if (action.machines.indexOf(machine.id) < 0) {
-          console.error(`-> since "${machine.name}" didn't exist, no need to process its removal`);
+          this._server.log(['debug'], `-> since "${machine.name}" didn't exist, no need to process its removal`);
           return cb(null, {
             action,
             completed: false
@@ -313,10 +313,10 @@ module.exports = class MachineWatcher {
       // scenarios: scale up, recreate, create
       // so far, the logic is the same for CREATE and REMOVE
       'CREATE': (action, cb) => {
-        console.error(`-> got CREATE action for "${machine.name}"`);
+        this._server.log(['debug'], `-> got CREATE action for "${machine.name}"`);
 
         if (ACTION_CREATE_STATUSES.indexOf(MACHINE_STATUS) < 0) {
-          console.error(`-> since "${machine.name}" is "${MACHINE_STATUS}", nothing to do here`);
+          this._server.log(['debug'], `-> since "${machine.name}" is "${MACHINE_STATUS}", nothing to do here`);
 
           return cb(null, {
             action,
@@ -325,7 +325,7 @@ module.exports = class MachineWatcher {
         }
 
         if (action.machines.indexOf(machine.id) >= 0) {
-          console.error(`-> since "${machine.name}" already existed, no need to process its creation`);
+          this._server.log(['debug'], `-> since "${machine.name}" already existed, no need to process its creation`);
           return cb(null, {
             action,
             completed: false
@@ -335,7 +335,7 @@ module.exports = class MachineWatcher {
         ActionResolvers._CREATE_OR_REMOVE(action, cb);
       },
       'START': (action, cb) => {
-        console.error(`-> got START action for "${machine.name}". redirecting`);
+        this._server.log(['debug'], `-> got START action for "${machine.name}". redirecting`);
         return ActionResolvers.NOOP(action, cb);
       }
     };
@@ -364,7 +364,7 @@ module.exports = class MachineWatcher {
 
         const newActions = ForceArray(result.successes);
 
-        console.error(`-> got new actions for "${service.name}" ${Util.inspect(newActions)}`);
+        this._server.log(['debug'], `-> got new actions for "${service.name}" ${Util.inspect(newActions)}`);
 
         const newServiceActions = newActions.filter(({ action }) => {
           return action.service === serviceName;
@@ -374,7 +374,7 @@ module.exports = class MachineWatcher {
           return completed;
         });
 
-        console.error(`-> are all actions for "${service.name}" completed? ${isCompleted}`);
+        this._server.log(['debug'], `-> are all actions for "${service.name}" completed? ${isCompleted}`);
 
         const newPlan = newActions.map(({ action }) => {
           return action;
@@ -383,7 +383,7 @@ module.exports = class MachineWatcher {
         VAsync.parallel({
           funcs: [
             (cb) => {
-              console.error(`-> updating Version ${version.id} with new plan ${Util.inspect(newPlan)}`);
+              this._server.log(['debug'], `-> updating Version ${version.id} with new plan ${Util.inspect(newPlan)}`);
 
               this._data.updateVersion({
                 id: version.id,
@@ -395,7 +395,7 @@ module.exports = class MachineWatcher {
                 return cb();
               }
 
-              console.error(`-> updating Service ${service.name} with new status: ACTIVE`);
+              this._server.log(['debug'], `-> updating Service ${service.name} with new status: ACTIVE`);
 
               return this._data.updateService({
                 id: service.id,
@@ -409,22 +409,22 @@ module.exports = class MachineWatcher {
 
     const ServiceResolvers = {
       'ACTIVE': (cb) => {
-        console.error(`-> got ACTIVE service "${service.name}". nothing to do`);
+        this._server.log(['debug'], `-> got ACTIVE service "${service.name}". nothing to do`);
 
         cb();
       },
       'PROVISIONING': (cb) => {
-        console.error(`-> got PROVISIONING service "${service.name}"`);
+        this._server.log(['debug'], `-> got PROVISIONING service "${service.name}"`);
 
         toBeActiveServiceResolver(cb);
       },
       'SCALING': (cb) => {
-        console.error(`-> got SCALING service "${service.name}"`);
+        this._server.log(['debug'], `-> got SCALING service "${service.name}"`);
 
         toBeActiveServiceResolver(cb);
       },
       'STOPPING': (cb) => {
-        console.error(`-> got STOPPING service "${service.name}"`);
+        this._server.log(['debug'], `-> got STOPPING service "${service.name}"`);
 
         if (SERVICE_STOPPING_STATUSES.indexOf(MACHINE_STATUS) < 0) {
           return cb();
@@ -451,7 +451,7 @@ module.exports = class MachineWatcher {
         return ServiceResolvers.ACTIVE(cb);
       },
       'DELETING': (cb) => {
-        console.error(`-> got DELETING service "${service.name}"`);
+        this._server.log(['debug'], `-> got DELETING service "${service.name}"`);
 
         if (SERVICE_DELETING_STATUSES.indexOf(MACHINE_STATUS) < 0) {
           return cb();
@@ -472,7 +472,7 @@ module.exports = class MachineWatcher {
         VAsync.parallel({
           funcs: [
             (cb) => {
-              console.error(`-> updating Service ${service.name} to set it DELETED`);
+              this._server.log(['debug'], `-> updating Service ${service.name} to set it DELETED`);
 
               this._data.updateService({
                 id: service.id,
@@ -480,7 +480,7 @@ module.exports = class MachineWatcher {
               }, cb);
             },
             (cb) => {
-              console.error(`-> updating DeploymentGroup ${deploymentGroup.id} to remove Service ${service.name}`);
+              this._server.log(['debug'], `-> updating DeploymentGroup ${deploymentGroup.id} to remove Service ${service.name}`);
 
               deploymentGroup.services({}, (err, services) => {
                 if (err) {
@@ -521,10 +521,10 @@ module.exports = class MachineWatcher {
         return cb(err);
       }
 
-      console.error(`-> created/updated machine ${machine.name}`);
+      this._server.log(['debug'], `-> created/updated machine ${machine.name}`);
 
       if (!hasPlan) {
-        console.error(`-> plan for ${service.name} is still not available. queuing`);
+        this._server.log(['debug'], `-> plan for ${service.name} is still not available. queuing`);
         this._waitingForPlan.push(machine);
         return cb();
       }
@@ -551,7 +551,7 @@ module.exports = class MachineWatcher {
 
   onChange (machine) {
     if (!machine) {
-      console.error('-> `change` event received without machine data');
+      this._server.log(['debug'], '-> `change` event received without machine data');
       return;
     }
 
@@ -561,7 +561,7 @@ module.exports = class MachineWatcher {
 
     // assert id existence
     if (!id) {
-      console.error('-> `change` event received for a machine without `id`');
+      this._server.log(['debug'], '-> `change` event received for a machine without `id`');
       return;
     }
 
@@ -573,7 +573,7 @@ module.exports = class MachineWatcher {
     );
 
     if (!isCompose) {
-      console.error(`-> Changed machine ${id} was not provisioned by docker-compose`);
+      this._server.log(['debug'], `-> Changed machine ${id} was not provisioned by docker-compose`);
       return;
     }
 
@@ -612,7 +612,7 @@ module.exports = class MachineWatcher {
         deploymentGroupId: deploymentGroup.id
       }, (err, service) => {
         if (isNotFound(err) || !service) {
-          console.error(`Service "${serviceName}" form DeploymentGroup "${deploymentGroupName}" for machine ${id} not found`);
+          this._server.log(['debug'], `Service "${serviceName}" form DeploymentGroup "${deploymentGroupName}" for machine ${id} not found`);
           return cb();
         }
 
@@ -631,12 +631,12 @@ module.exports = class MachineWatcher {
     // also, lock into `deploymentGroupId` queue
     this.getDeploymentGroup(deploymentGroupName, (err, deploymentGroup) => {
       if (isNotFound(err) || !deploymentGroup) {
-        console.error(`DeploymentGroup "${deploymentGroupName}" for machine ${id} not found`);
+        this._server.log(['debug', 'error'], `DeploymentGroup "${deploymentGroupName}" for machine ${id} not found`);
         return;
       }
 
       if (err) {
-        console.error(err);
+        this._server.log(['error'], err);
         return;
       }
 
@@ -644,7 +644,7 @@ module.exports = class MachineWatcher {
         return new Promise((resolve) => {
           assertService(deploymentGroup, (err) => {
             if (err) {
-              console.error(err);
+              this._server.log(['error'], err);
             }
 
             resolve();

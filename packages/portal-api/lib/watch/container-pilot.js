@@ -125,7 +125,7 @@ module.exports = class ContainerPilotWatcher extends Events {
 
     const handleStatus = (status) => {
       if (!status) {
-        return cb(null, instance);
+        return;
       }
 
       const services = ForceArray(status.Services).filter(({ Name }) => {
@@ -134,24 +134,23 @@ module.exports = class ContainerPilotWatcher extends Events {
 
       instance.cp = {
         status,
-        Services: services
+        Services: services,
+        Watches: status.Watches
       };
 
-      cb(null, instance);
+      return instance;
     };
 
-    const fetchStatus = (ip) => {
-      return new Promise((resolve, reject) => {
-        Wreck.get(`http://${ip}:9090/status`, {
-          timeout: 2000,    // 2 seconds
-          json: 'force'
-        }, (err, res, status) => {
-          if (err) {
-            return reject(err);
-          }
+    const fetchStatus = (ip, next) => {
+      Wreck.get(`http://${ip}:9090/status`, {
+        timeout: 2000,    // 2 seconds
+        json: 'force'
+      }, (err, res, status) => {
+        if (err) {
+          return next(err);
+        }
 
-          resolve(status);
-        });
+        next(null, status);
       });
     };
 
@@ -162,20 +161,20 @@ module.exports = class ContainerPilotWatcher extends Events {
       }
 
       if (!machine || !Array.isArray(machine.ips)) {
-        return cb(null, instance);
+        return cb();
       }
 
-      machine.ips.find(async (ip) => {
-        try {
-          const status = await fetchStatus(ip);
-          return handleStatus(status);
-        } catch (ex) {
-          this.emit('error', err);
-          return;
+      VAsync.forEachParallel({
+        func: fetchStatus,
+        inputs: machine.ips
+      }, (err, results) => {
+        if (err || !results.successes || !results.successes.length) {
+          return cb(err);
         }
-      });
 
-      return cb(null, instance);
+        const instance = handleStatus(results.successes[0]);
+        return cb(null, instance);
+      });
     });
   }
 

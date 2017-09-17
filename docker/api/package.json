@@ -1,6 +1,6 @@
 {
   "name": "api",
-  "version": "1.8.12",
+  "version": "1.8.15",
   "description": "",
   "main": "./server.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "joi": "^10.6.0",
     "joyent-cp-gql-schema": "^1.7.0",
     "piloted": "^3.1.1",
-    "portal-api": "^1.8.12",
+    "portal-api": "^1.8.15",
     "toppsy": "^1.1.0",
     "triton": "^5.2.0"
   }
