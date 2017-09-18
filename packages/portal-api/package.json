@@ -33,7 +33,6 @@
   },
   "dependencies": {
     "boom": "^5.2.0",
-    "cidr-matcher": "^1.0.5",
     "docker-compose-client": "^1.1.0",
     "dockerode": "^2.5.0",
     "force-array": "^3.1.0",

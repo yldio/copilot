@@ -239,7 +239,7 @@ module.exports = class MachineWatcher {
     const hasPlan = Boolean(Get(version, 'plan.hasPlan', true));
     const serviceName = service.name;
 
-    this._server.log(['debug'],`-> detected meta for machine ${machine.name} ${Util.inspect({
+    this._server.log(['debug'], `-> detected meta for machine ${machine.name} ${Util.inspect({
       SERVICE_STATUS,
       MACHINE_STATUS,
       hasPlan,

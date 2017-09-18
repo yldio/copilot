@@ -5,7 +5,6 @@ const Flatten = require('lodash.flatten');
 const Triton = require('triton');
 const VAsync = require('vasync');
 const Wreck = require('wreck');
-const CIDRMatcher = require('cidr-matcher');
 const ForceArray = require('force-array');
 const Get = require('lodash.get');
 const Uniq = require('lodash.uniq');
