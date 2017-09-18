@@ -1,6 +1,6 @@
 {
   "name": "joyent-cp-gql-schema",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "license": "MPL-2.0",
   "repository": "github:yldio/copilot",
   "main": "index.js",

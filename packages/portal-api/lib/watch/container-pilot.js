@@ -167,7 +167,7 @@ module.exports = class ContainerPilotWatcher extends Events {
         func: fetchStatus,
         inputs: machine.ips
       }, (err, results) => {
-        if (err || !results.successes || !results.successes.length) {
+        if (err && (!results.successes || !results.successes.length)) {
           return cb(err);
         }
 
