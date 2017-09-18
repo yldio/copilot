@@ -466,6 +466,10 @@ class Data extends EventEmitter {
           return cb(err);
         }
 
+        if (!deploymentGroup) {
+          return cb(null);
+        }
+
         cb(null, Transform.fromDeploymentGroup(this._getDeploymentGroupFns(deploymentGroup)));
       });
     }
@@ -545,7 +549,9 @@ class Data extends EventEmitter {
             }, next);
           }
         ]
-      }, cb);
+      }, (err) => {
+        cb(err, res.dg);
+      });
     };
 
     VAsync.parallel({
@@ -695,7 +701,21 @@ class Data extends EventEmitter {
           return finish(err);
         }
 
-        this._db.versions.get(deploymentGroup.history, finish);
+        if (!deploymentGroup) {
+          return finish(null, []);
+        }
+
+        deploymentGroup.history({}, (err, history) => {
+          if (err) {
+            return finish(err);
+          }
+
+          if (!history.length) {
+            return finish(null, []);
+          }
+
+          this._db.versions.get(deploymentGroup.history.map(({ id }) => { return { id }; }), finish);
+        });
       });
     });
   }
