@@ -72,7 +72,7 @@ frontend:
 #  BACKEND
 #############################################################################
 api:
-  image: joyent/copilot-api:1.8.15
+  image: joyent/copilot-api:1.8.16
   mem_limit: 1g
   expose:
     - 3000
@@ -81,8 +81,6 @@ api:
     - _env
   environment:
     - PORT=3000
-  ports:
-    - "8080:8080"
   restart: always
 
 # Docker-compose wrapper
