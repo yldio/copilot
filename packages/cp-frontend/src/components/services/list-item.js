@@ -24,9 +24,7 @@ import {
   Anchor
 } from 'joyent-ui-toolkit';
 
-const StyledCardHeader = styled(CardHeader)`
-  position: relative;
-`;
+const StyledCardHeader = styled(CardHeader)`position: relative;`;
 
 const TitleInnerContainer = styled.div`
   display: flex;
@@ -82,15 +80,18 @@ const GraphTitle = Small.extend`
   color: #494949;
 `;
 
+const HealthyIconStyled = styled(HealthyIcon)`
+  /* I SAID NO PRETTIER */
+  display: flex;
+`;
+
 const ChildTitle = styled(CardTitle)`
   padding: 0;
   flex: 0 1 auto;
   align-self: stretch;
 `;
 
-const ServiceView = styled(CardView)`
-  height: ${remcalc(120)};
-`;
+const ServiceView = styled(CardView)`height: ${remcalc(120)};`;
 
 const StatusContainer = styled(CardDescription)`
   display: flex;
@@ -170,7 +171,7 @@ const ServiceListItem = ({
   if (service.instancesActive) {
     const { total, healthy } = service.instancesHealthy;
     const iconHealthy = total === healthy ? 'HEALTHY' : 'NOT HEALTHY';
-    const icon = <HealthyIcon healthy={iconHealthy} />;
+    const icon = <HealthyIconStyled healthy={iconHealthy} />;
     const label = `${healthy} of ${total} healthy`;
 
     healthyInfo = (

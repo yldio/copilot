@@ -79,17 +79,31 @@ const StyledCard = Card.extend`
 
     & [name="card-options"] > button {
       background-color: ${props => props.theme.background};
-    }`
-  }
+    }`};
 `;
 
 const StatusContainer = styled.div`
   height: 100%;
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+const HealthyIconStyled = styled(HealthyIcon)`
+  transform: translateY(-50%);
+  position: absolute;
+`;
+
+const CardInfoStyled = styled.div`
+  height: 100%;
+  & > div {
+    min-width: 115px;
+  }
+`;
+
+const Status = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const InstanceCard = ({
@@ -107,7 +121,7 @@ const InstanceCard = ({
   );
 
   const label = (instance.healthy || 'UNKNOWN').toLowerCase();
-  const icon = <HealthyIcon healthy={instance.healthy} />;
+  const icon = <HealthyIconStyled healthy={instance.healthy} />;
 
   const handleHealthMouseOver = evt => {
     onHealthMouseOver(evt, instance);
@@ -126,24 +140,26 @@ const InstanceCard = ({
       <CardView>
         <CardTitle>{instance.name}</CardTitle>
         <CardDescription>
-          <CardInfo
-            icon={icon}
-            iconPosition="left"
-            label={label}
-            color="dark"
-            onMouseOver={handleHealthMouseOver}
-            onMouseOut={handleMouseOut}
-          />
+          <CardInfoStyled>
+            <CardInfo
+              icon={icon}
+              iconPosition="left"
+              label={label}
+              color="dark"
+              onMouseOver={handleHealthMouseOver}
+              onMouseOut={handleMouseOut}
+            />
+          </CardInfoStyled>
         </CardDescription>
         <CardDescription>
           <StatusContainer
             onMouseOver={handleStatusMouseOver}
             onMouseOut={handleMouseOut}
           >
-            <Label>
+            <Status>
               <Dot {...statusProps} />
-              {titleCase(instance.status)}
-            </Label>
+              <Label>{titleCase(instance.status)}</Label>
+            </Status>
           </StatusContainer>
         </CardDescription>
       </CardView>

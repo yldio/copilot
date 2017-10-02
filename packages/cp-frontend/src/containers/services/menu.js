@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { compose } from 'react-apollo';
 import { Col, Row } from 'react-styled-flexboxgrid';
@@ -12,14 +13,16 @@ import { FormGroup, Toggle, ToggleList, Legend } from 'joyent-ui-toolkit';
 
 const StyledLegend = Legend.extend`
   float: left;
-  padding-top: ${unitcalc(2)};
-  margin-right: ${unitcalc(1.5)};
+  margin-bottom: ${unitcalc(1.5)};
 `;
 
-const PaddedRow = Row.extend`
-  margin-bottom: ${remcalc(18)}
-`;
+const PaddedRow = Row.extend`margin-bottom: ${remcalc(18)};`;
 
+const ToggleStyled = styled(Toggle)`
+  & + label {
+    padding: ${remcalc(16)};
+  }
+`;
 
 export const ServicesMenu = ({ location: { pathname }, history: { push } }) => {
   const toggleValue = pathname.split('-').pop();
@@ -38,15 +41,15 @@ export const ServicesMenu = ({ location: { pathname }, history: { push } }) => {
       <Title>Services</Title>
       <PaddedRow>
         <Col xs={5}>
+          <StyledLegend>Show</StyledLegend>
           <FormGroup name="service-view" value={toggleValue}>
-            <StyledLegend>View</StyledLegend>
             <ToggleList>
-              <Toggle value="list" onChange={handleToggle}>
+              <ToggleStyled value="list" onChange={handleToggle}>
                 List
-              </Toggle>
-              <Toggle value="topology" onChange={handleToggle}>
+              </ToggleStyled>
+              <ToggleStyled value="topology" onChange={handleToggle}>
                 Topology
-              </Toggle>
+              </ToggleStyled>
             </ToggleList>
           </FormGroup>
         </Col>
