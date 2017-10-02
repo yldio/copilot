@@ -192,7 +192,7 @@ exports[`renders <Files /> without throwing 1`] = `
         >
           <input
             className="c4 c5"
-            id="ugaHI"
+            id="SlzVp"
             placeholder="Filename including extension…"
             type="text"
             value={undefined}

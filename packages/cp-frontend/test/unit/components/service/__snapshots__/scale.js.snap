@@ -358,7 +358,7 @@ exports[`renders <Scale /> without throwing 1`] = `
       >
         <input
           className="c7 c8"
-          id="cDfjvW"
+          id="bZKUCn"
           name="replicas"
           onBlur={[Function]}
           onChange={[Function]}
