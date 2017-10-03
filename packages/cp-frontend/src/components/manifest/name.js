@@ -1,11 +1,11 @@
 import React from 'react';
 import { Row, Col } from 'react-styled-flexboxgrid';
 import remcalc from 'remcalc';
+import StyledFormLabel from './label';
 
 import {
   FormMeta,
   Button,
-  FormLabel,
   Input,
   Small,
   FormGroup
@@ -19,7 +19,7 @@ export const Name = ({ handleSubmit, onCancel, dirty }) => (
       <Col xs={12} md={4} lg={4}>
         <FormGroup name="name" reduxForm>
           <FormMeta left>
-            <FormLabel>Name the new deployment group</FormLabel>
+            <StyledFormLabel>Name the new deployment group</StyledFormLabel>
             <Small>
               Your services will be deployed to eu-east-1 data center.
             </Small>

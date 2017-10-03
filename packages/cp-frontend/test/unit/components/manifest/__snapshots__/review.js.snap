@@ -1,26 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders <Review /> without throwing 1`] = `
-.c3 {
+.c10 {
   -webkit-animation: iCqDak 1.5s ease-out 0s infinite;
   animation: iCqDak 1.5s ease-out 0s infinite;
 }
 
-.c4 {
+.c11 {
   -webkit-animation: iCqDak 1.5s ease-out 0s infinite;
   animation: iCqDak 1.5s ease-out 0s infinite;
   -webkit-animation-delay: 0.5s;
   animation-delay: 0.5s;
 }
 
-.c5 {
+.c12 {
   -webkit-animation: iCqDak 1.5s ease-out 0s infinite;
   animation: iCqDak 1.5s ease-out 0s infinite;
   -webkit-animation-delay: 1s;
   animation-delay: 1s;
 }
 
-.c1 {
+.c8 {
   font-family: sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -66,47 +66,47 @@ exports[`renders <Review /> without throwing 1`] = `
   box-shadow: 0 0.125rem 0 0 rgba(0,0,0,0.05);
 }
 
-.c1::-moz-focus-inner,
-.c1[type='button']::-moz-focus-inner,
-.c1[type='reset']::-moz-focus-inner,
-.c1[type='submit']::-moz-focus-inner {
+.c8::-moz-focus-inner,
+.c8[type='button']::-moz-focus-inner,
+.c8[type='reset']::-moz-focus-inner,
+.c8[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-.c1:-moz-focusring,
-.c1[type='button']:-moz-focusring,
-.c1[type='reset']:-moz-focusring,
-.c1[type='submit']:-moz-focusring {
+.c8:-moz-focusring,
+.c8[type='button']:-moz-focusring,
+.c8[type='reset']:-moz-focusring,
+.c8[type='submit']:-moz-focusring {
   outline: 0.0625rem dotted ButtonText;
 }
 
-.c1:focus {
+.c8:focus {
   outline: 0;
   text-decoration: none;
 }
 
-.c1:hover {
+.c8:hover {
   border: solid 0.0625rem;
 }
 
-.c1:active,
-.c1:active:hover,
-.c1:active:focus {
+.c8:active,
+.c8:active:hover,
+.c8:active:focus {
   background-image: none;
   outline: 0;
 }
 
-.c1[disabled] {
+.c8[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c1 + button {
+.c8 + button {
   margin-left: 1.25rem;
 }
 
-.c2 {
+.c9 {
   font-family: sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -149,50 +149,90 @@ exports[`renders <Review /> without throwing 1`] = `
   background-image: none;
   border-radius: 0.25rem;
   border: solid 0.0625rem;
-  box-shadow: 0 0.125rem 0 0 rgba(0,0,0,0.05);
 }
 
-.c2::-moz-focus-inner,
-.c2[type='button']::-moz-focus-inner,
-.c2[type='reset']::-moz-focus-inner,
-.c2[type='submit']::-moz-focus-inner {
+.c9::-moz-focus-inner,
+.c9[type='button']::-moz-focus-inner,
+.c9[type='reset']::-moz-focus-inner,
+.c9[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-.c2:-moz-focusring,
-.c2[type='button']:-moz-focusring,
-.c2[type='reset']:-moz-focusring,
-.c2[type='submit']:-moz-focusring {
+.c9:-moz-focusring,
+.c9[type='button']:-moz-focusring,
+.c9[type='reset']:-moz-focusring,
+.c9[type='submit']:-moz-focusring {
   outline: 0.0625rem dotted ButtonText;
 }
 
-.c2:focus {
+.c9:focus {
   outline: 0;
   text-decoration: none;
 }
 
-.c2:hover {
+.c9:hover {
   border: solid 0.0625rem;
 }
 
-.c2:active,
-.c2:active:hover,
-.c2:active:focus {
+.c9:active,
+.c9:active:hover,
+.c9:active:focus {
   background-image: none;
   outline: 0;
 }
 
-.c2[disabled] {
+.c9[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2 + button {
+.c9 + button {
   margin-left: 1.25rem;
+}
+
+.c4 {
+  font-family: "Libre Franklin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.c6 {
+  font-family: "Libre Franklin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+  font-weight: 400;
+  line-height: 1.5rem;
+  font-size: 0.9375rem;
 }
 
 .c0 {
+  position: relative;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 0.125rem 0 0 rgba(0,0,0,0.05);
+  border: 0.0625rem solid;
+}
+
+.c1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.25rem;
+  height: 100%;
+}
+
+.c2 {
+  padding: 0.75rem 0 0.84375rem 0;
+}
+
+.c3 {
+  margin: 0 3.375rem 0.09375rem 3.375rem;
+  font-weight: 600;
+}
+
+.c5 {
+  margin: 0.09375rem 3.375rem 0 3.375rem;
+}
+
+.c7 {
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -218,8 +258,35 @@ exports[`renders <Review /> without throwing 1`] = `
   <div
     className="c0"
   >
-    <button
+    <div
       className="c1"
+      type="EDUCATIONAL"
+    />
+    <div
+      className="c2"
+    >
+      <h3
+        className="c3 c4"
+      >
+        Reviewing
+      </h3>
+      <p
+        className="c5 c6"
+      >
+        Review names of services, images being used and packages you chose or that have been recommended to you
+      </p>
+    </div>
+  </div>
+  <p
+    className="c6"
+  >
+    A single instance of each service will be deployed.
+  </p>
+  <div
+    className="c7"
+  >
+    <button
+      className="c8"
       disabled={true}
       onClick={[Function]}
       type="button"
@@ -227,8 +294,7 @@ exports[`renders <Review /> without throwing 1`] = `
       Cancel
     </button>
     <button
-      className="c2"
-      disabled={true}
+      className="c9"
       type="submit"
     >
       <svg
@@ -236,21 +302,21 @@ exports[`renders <Review /> without throwing 1`] = `
         width="28"
       >
         <rect
-          className="c3"
+          className="c10"
           height="6"
           width="6"
           x="2"
           y="2"
         />
         <rect
-          className="c4"
+          className="c11"
           height="6"
           width="6"
           x="11"
           y="2"
         />
         <rect
-          className="c5"
+          className="c12"
           height="6"
           width="6"
           x="20"
@@ -263,7 +329,7 @@ exports[`renders <Review /> without throwing 1`] = `
 `;
 
 exports[`renders <Review /> without throwing 2`] = `
-.c1 {
+.c9 {
   font-family: sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -308,47 +374,47 @@ exports[`renders <Review /> without throwing 2`] = `
   border: solid 0.0625rem;
 }
 
-.c1::-moz-focus-inner,
-.c1[type='button']::-moz-focus-inner,
-.c1[type='reset']::-moz-focus-inner,
-.c1[type='submit']::-moz-focus-inner {
+.c9::-moz-focus-inner,
+.c9[type='button']::-moz-focus-inner,
+.c9[type='reset']::-moz-focus-inner,
+.c9[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-.c1:-moz-focusring,
-.c1[type='button']:-moz-focusring,
-.c1[type='reset']:-moz-focusring,
-.c1[type='submit']:-moz-focusring {
+.c9:-moz-focusring,
+.c9[type='button']:-moz-focusring,
+.c9[type='reset']:-moz-focusring,
+.c9[type='submit']:-moz-focusring {
   outline: 0.0625rem dotted ButtonText;
 }
 
-.c1:focus {
+.c9:focus {
   outline: 0;
   text-decoration: none;
 }
 
-.c1:hover {
+.c9:hover {
   border: solid 0.0625rem;
 }
 
-.c1:active,
-.c1:active:hover,
-.c1:active:focus {
+.c9:active,
+.c9:active:hover,
+.c9:active:focus {
   background-image: none;
   outline: 0;
 }
 
-.c1[disabled] {
+.c9[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c1 + button {
+.c9 + button {
   margin-left: 1.25rem;
 }
 
-.c2 {
+.c8 {
   font-family: sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -393,47 +459,88 @@ exports[`renders <Review /> without throwing 2`] = `
   border: solid 0.0625rem;
 }
 
-.c2::-moz-focus-inner,
-.c2[type='button']::-moz-focus-inner,
-.c2[type='reset']::-moz-focus-inner,
-.c2[type='submit']::-moz-focus-inner {
+.c8::-moz-focus-inner,
+.c8[type='button']::-moz-focus-inner,
+.c8[type='reset']::-moz-focus-inner,
+.c8[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-.c2:-moz-focusring,
-.c2[type='button']:-moz-focusring,
-.c2[type='reset']:-moz-focusring,
-.c2[type='submit']:-moz-focusring {
+.c8:-moz-focusring,
+.c8[type='button']:-moz-focusring,
+.c8[type='reset']:-moz-focusring,
+.c8[type='submit']:-moz-focusring {
   outline: 0.0625rem dotted ButtonText;
 }
 
-.c2:focus {
+.c8:focus {
   outline: 0;
   text-decoration: none;
 }
 
-.c2:hover {
+.c8:hover {
   border: solid 0.0625rem;
 }
 
-.c2:active,
-.c2:active:hover,
-.c2:active:focus {
+.c8:active,
+.c8:active:hover,
+.c8:active:focus {
   background-image: none;
   outline: 0;
 }
 
-.c2[disabled] {
+.c8[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2 + button {
+.c8 + button {
   margin-left: 1.25rem;
+}
+
+.c4 {
+  font-family: "Libre Franklin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.c6 {
+  font-family: "Libre Franklin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+  font-weight: 400;
+  line-height: 1.5rem;
+  font-size: 0.9375rem;
 }
 
 .c0 {
+  position: relative;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 0.125rem 0 0 rgba(0,0,0,0.05);
+  border: 0.0625rem solid;
+}
+
+.c1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.25rem;
+  height: 100%;
+}
+
+.c2 {
+  padding: 0.75rem 0 0.84375rem 0;
+}
+
+.c3 {
+  margin: 0 3.375rem 0.09375rem 3.375rem;
+  font-weight: 600;
+}
+
+.c5 {
+  margin: 0.09375rem 3.375rem 0 3.375rem;
+}
+
+.c7 {
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -459,8 +566,35 @@ exports[`renders <Review /> without throwing 2`] = `
   <div
     className="c0"
   >
-    <button
+    <div
       className="c1"
+      type="EDUCATIONAL"
+    />
+    <div
+      className="c2"
+    >
+      <h3
+        className="c3 c4"
+      >
+        Reviewing
+      </h3>
+      <p
+        className="c5 c6"
+      >
+        Review names of services, images being used and packages you chose or that have been recommended to you
+      </p>
+    </div>
+  </div>
+  <p
+    className="c6"
+  >
+    A single instance of each service will be deployed.
+  </p>
+  <div
+    className="c7"
+  >
+    <button
+      className="c8"
       disabled={undefined}
       onClick={[Function]}
       type="button"
@@ -468,8 +602,7 @@ exports[`renders <Review /> without throwing 2`] = `
       Cancel
     </button>
     <button
-      className="c2"
-      disabled={undefined}
+      className="c9"
       type="submit"
     >
       Confirm and Deploy
@@ -479,7 +612,7 @@ exports[`renders <Review /> without throwing 2`] = `
 `;
 
 exports[`renders <Review /> without throwing 3`] = `
-.c1 {
+.c9 {
   font-family: sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -524,47 +657,47 @@ exports[`renders <Review /> without throwing 3`] = `
   border: solid 0.0625rem;
 }
 
-.c1::-moz-focus-inner,
-.c1[type='button']::-moz-focus-inner,
-.c1[type='reset']::-moz-focus-inner,
-.c1[type='submit']::-moz-focus-inner {
+.c9::-moz-focus-inner,
+.c9[type='button']::-moz-focus-inner,
+.c9[type='reset']::-moz-focus-inner,
+.c9[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-.c1:-moz-focusring,
-.c1[type='button']:-moz-focusring,
-.c1[type='reset']:-moz-focusring,
-.c1[type='submit']:-moz-focusring {
+.c9:-moz-focusring,
+.c9[type='button']:-moz-focusring,
+.c9[type='reset']:-moz-focusring,
+.c9[type='submit']:-moz-focusring {
   outline: 0.0625rem dotted ButtonText;
 }
 
-.c1:focus {
+.c9:focus {
   outline: 0;
   text-decoration: none;
 }
 
-.c1:hover {
+.c9:hover {
   border: solid 0.0625rem;
 }
 
-.c1:active,
-.c1:active:hover,
-.c1:active:focus {
+.c9:active,
+.c9:active:hover,
+.c9:active:focus {
   background-image: none;
   outline: 0;
 }
 
-.c1[disabled] {
+.c9[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c1 + button {
+.c9 + button {
   margin-left: 1.25rem;
 }
 
-.c2 {
+.c8 {
   font-family: sans-serif;
   font-size: 100%;
   line-height: 1.15;
@@ -609,47 +742,88 @@ exports[`renders <Review /> without throwing 3`] = `
   border: solid 0.0625rem;
 }
 
-.c2::-moz-focus-inner,
-.c2[type='button']::-moz-focus-inner,
-.c2[type='reset']::-moz-focus-inner,
-.c2[type='submit']::-moz-focus-inner {
+.c8::-moz-focus-inner,
+.c8[type='button']::-moz-focus-inner,
+.c8[type='reset']::-moz-focus-inner,
+.c8[type='submit']::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
 
-.c2:-moz-focusring,
-.c2[type='button']:-moz-focusring,
-.c2[type='reset']:-moz-focusring,
-.c2[type='submit']:-moz-focusring {
+.c8:-moz-focusring,
+.c8[type='button']:-moz-focusring,
+.c8[type='reset']:-moz-focusring,
+.c8[type='submit']:-moz-focusring {
   outline: 0.0625rem dotted ButtonText;
 }
 
-.c2:focus {
+.c8:focus {
   outline: 0;
   text-decoration: none;
 }
 
-.c2:hover {
+.c8:hover {
   border: solid 0.0625rem;
 }
 
-.c2:active,
-.c2:active:hover,
-.c2:active:focus {
+.c8:active,
+.c8:active:hover,
+.c8:active:focus {
   background-image: none;
   outline: 0;
 }
 
-.c2[disabled] {
+.c8[disabled] {
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.c2 + button {
+.c8 + button {
   margin-left: 1.25rem;
+}
+
+.c4 {
+  font-family: "Libre Franklin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.c6 {
+  font-family: "Libre Franklin",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica,sans-serif;
+  font-weight: 400;
+  line-height: 1.5rem;
+  font-size: 0.9375rem;
 }
 
 .c0 {
+  position: relative;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 0.125rem 0 0 rgba(0,0,0,0.05);
+  border: 0.0625rem solid;
+}
+
+.c1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.25rem;
+  height: 100%;
+}
+
+.c2 {
+  padding: 0.75rem 0 0.84375rem 0;
+}
+
+.c3 {
+  margin: 0 3.375rem 0.09375rem 3.375rem;
+  font-weight: 600;
+}
+
+.c5 {
+  margin: 0.09375rem 3.375rem 0 3.375rem;
+}
+
+.c7 {
   box-sizing: border-box;
   display: -webkit-box;
   display: -webkit-flex;
@@ -675,8 +849,35 @@ exports[`renders <Review /> without throwing 3`] = `
   <div
     className="c0"
   >
-    <button
+    <div
       className="c1"
+      type="EDUCATIONAL"
+    />
+    <div
+      className="c2"
+    >
+      <h3
+        className="c3 c4"
+      >
+        Reviewing
+      </h3>
+      <p
+        className="c5 c6"
+      >
+        Review names of services, images being used and packages you chose or that have been recommended to you
+      </p>
+    </div>
+  </div>
+  <p
+    className="c6"
+  >
+    A single instance of each service will be deployed.
+  </p>
+  <div
+    className="c7"
+  >
+    <button
+      className="c8"
       disabled={undefined}
       onClick={[Function]}
       type="button"
@@ -684,8 +885,7 @@ exports[`renders <Review /> without throwing 3`] = `
       Cancel
     </button>
     <button
-      className="c2"
-      disabled={undefined}
+      className="c9"
       type="submit"
     >
       Confirm and Deploy

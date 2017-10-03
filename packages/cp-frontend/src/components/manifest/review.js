@@ -7,9 +7,9 @@ import {
   Divider,
   H3,
   P,
-  Chevron,
   typography,
-  Card
+  Card,
+  Message
 } from 'joyent-ui-toolkit';
 import forceArray from 'force-array';
 import styled from 'styled-components';
@@ -54,14 +54,21 @@ const ServiceCard = Card.extend`
 
 const Dl = styled.dl`margin: 0;`;
 
-const EnvironmentChevron = styled(Chevron)`float: right;`;
+const Chevron = styled.svg`
+  transform: ;
+  float: right;
+  position: relative;
+  margin-top: 16px;
+  transform: ${props =>
+    props.down ? 'rotate(90deg) scale(3)' : 'rotate(270deg) scale(3)'};
+`;
 
 const EnvironmentReview = ({ environment }) => {
   const value = environment
     .map(({ name, value }) => `${name}=${value}`)
     .join('\n');
 
-  return <EEditor input={{ value }} />;
+  return <EEditor readOnly input={{ value }} />;
 };
 
 export const Review = ({
@@ -71,8 +78,10 @@ export const Review = ({
   dirty,
   loading,
   environmentToggles,
+  datacenter,
   ...state
 }) => {
+  console.log(datacenter);
   const serviceList = forceArray(state.services).map(({ name, config }) => (
     <ServiceCard key={name}>
       <ServiceName>{name}</ServiceName>
@@ -90,10 +99,18 @@ export const Review = ({
           onClick={() => onEnvironmentToggle(name)}
         >
           Environment variables{' '}
-          <EnvironmentChevron
+          { /* I'M SORRY */ }
+          <Chevron
+            width="20"
+            height="7"
+            viewBox="0 0 10 20"
             down={!environmentToggles[name]}
-            up={environmentToggles[name]}
-          />
+          >
+            <path
+              fill="#464646"
+              d="M 1.1206 0L 0 1.36044L 3.49581 4.8L 0 8.23956L 1.1206 9.6L 6 4.8L 1.1206 0Z"
+            />
+          </Chevron>
         </ServiceEnvironmentTitle>
       ) : null}
       {config.environment &&
@@ -106,12 +123,18 @@ export const Review = ({
 
   return (
     <form onSubmit={handleSubmit}>
+      <Message
+        title="Reviewing"
+        message="Review names of services, images being used and packages you chose or that have been recommended to you"
+        type="EDUCATIONAL"
+      />
       {serviceList}
+      <P>A single instance of each service will be deployed.</P>
       <ButtonsRow>
         <Button type="button" onClick={onCancel} disabled={loading} secondary>
           Cancel
         </Button>
-        <Button disabled={loading} loading={loading} type="submit">
+        <Button loading={loading} type="submit">
           Confirm and Deploy
         </Button>
       </ButtonsRow>
@@ -119,5 +142,4 @@ export const Review = ({
   );
 };
 
-
-export default Review
+export default Review;

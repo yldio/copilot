@@ -10,7 +10,7 @@
     "lint-ci": "eslint . --format junit --output-file $CIRCLE_TEST_REPORTS/lint/cp-gql-mock-server.xml",
     "test": "NODE_ENV=test nyc --reporter=lcov --reporter=text ava --verbose",
     "test-ci": "NODE_ENV=test nyc --report-dir=$CIRCLE_ARTIFACTS/cp-gql-mock-server --reporter=lcov --reporter=text ava --verbose --tap | tap-xunit > $CIRCLE_TEST_REPORTS/test/cp-gql-mock-server.xml",
-    "start": "node src/index.js",
+    "start": "PORT=4000 node src/index.js",
     "dev": "PORT=3000 nodemon src/index.js",
     "prepublish": "echo 0"
   },
@@ -36,12 +36,14 @@
   },
   "devDependencies": {
     "apollo-client": "^1.9.2",
+    "apr-for-each": "^1.0.6",
     "ava": "^0.22.0",
     "delay": "^2.0.0",
     "eslint": "^4.5.0",
     "eslint-config-joyent-portal": "3.0.0",
     "execa": "^0.8.0",
     "lodash.sortby": "^4.7.0",
+    "lodash.uniq": "^4.5.0",
     "mz": "^2.6.0",
     "node-fetch": "^1.7.2",
     "nodemon": "^1.11.0",
@@ -49,8 +51,12 @@
     "tap-xunit": "^1.7.0"
   },
   "ava": {
-    "files": ["test/*.js"],
-    "source": ["src/*.js"],
+    "files": [
+      "test/*.js"
+    ],
+    "source": [
+      "src/*.js"
+    ],
     "failFast": true
   }
 }

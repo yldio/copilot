@@ -14,10 +14,9 @@ import DeploymentGroupsQuery from '@graphql/DeploymentGroups.gql';
 import DeploymentGroupsImportableQuery from '@graphql/DeploymentGroupsImportable.gql';
 import { H3, Small, IconButton, BinIcon } from 'joyent-ui-toolkit';
 import { withNotFound, GqlPaths } from '@containers/navigation';
+import ImportIcon from '../../assets/Import.svg';
 
-const DGsRows = Row.extend`
-  margin-top: ${remcalc(-7)};
-`;
+const DGsRows = Row.extend`margin-top: ${remcalc(-7)};`;
 
 const Box = styled.div`
   position: relative;
@@ -162,7 +161,9 @@ export const DeploymentGroupList = ({
       <Col xs={12} sm={4} md={3} lg={3} key={slug}>
         <BoxCreate>
           <StyledCreateLink to={`${match.path}/~import/${slug}`}>
-            <Oval>&#10549;</Oval>
+            <Oval>
+              <ImportIcon />
+            </Oval>
             <CreateTitle>{name}</CreateTitle>
           </StyledCreateLink>
         </BoxCreate>
