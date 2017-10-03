@@ -6,6 +6,7 @@
   "main": "build/",
   "scripts": {
     "dev": "REACT_APP_GQL_PORT=3000 PORT=3069 REACT_APP_GQL_PROTOCOL=http react-scripts start",
+    "start-now": "REACT_APP_GQL_PORT=8080 PORT=3069 REACT_APP_GQL_HOSTNAME=joyent-cp-gql-mock-server-sxcvsebikv.now.sh react-scripts start",
     "start": "PORT=3069 react-scripts start",
     "build": "NODE_ENV=production react-scripts build",
     "lint:css": "echo 0",

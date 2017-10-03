@@ -49,7 +49,7 @@ export const Environment = ({
         loading={loading}
         type="submit"
       >
-        Continue
+        Next
       </Button>
     </ButtonsRow>
   ) : null;

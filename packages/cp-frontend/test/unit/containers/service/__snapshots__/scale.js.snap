@@ -516,7 +516,7 @@ exports[`renders <ServiceScale /> without throwing 1`] = `
           >
             <input
               className="c12 c13"
-              id="bIxZkW"
+              id="efBEr"
               name="replicas"
               onBlur={[Function]}
               onChange={[Function]}

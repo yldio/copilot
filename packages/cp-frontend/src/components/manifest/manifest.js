@@ -1,13 +1,12 @@
 import React from 'react';
-import { FormGroup, FormMeta, Button, FormLabel } from 'joyent-ui-toolkit';
+import { FormGroup, FormMeta, Button } from 'joyent-ui-toolkit';
 import { Row } from 'react-styled-flexboxgrid';
 import remcalc from 'remcalc';
 import { Field } from 'redux-form';
 import { MEditor } from './editors';
+import StyledFormLabel from './label';
 
-const ButtonsRow = Row.extend`
-  margin: ${remcalc(29)} 0 ${remcalc(60)} 0;
-`;
+const ButtonsRow = Row.extend`margin: ${remcalc(29)} 0 ${remcalc(60)} 0;`;
 
 export const Manifest = ({
   handleSubmit,
@@ -19,7 +18,7 @@ export const Manifest = ({
   <form onSubmit={handleSubmit}>
     <FormGroup reduxForm>
       <FormMeta left>
-        <FormLabel>Project manifest</FormLabel>
+        <StyledFormLabel bottomSpace>Project manifest</StyledFormLabel>
       </FormMeta>
       <Field name="manifest" defaultValue={defaultValue} component={MEditor} />
     </FormGroup>
@@ -32,7 +31,7 @@ export const Manifest = ({
         loading={loading}
         type="submit"
       >
-        Environment
+        Next
       </Button>
     </ButtonsRow>
   </form>
