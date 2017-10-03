@@ -344,7 +344,7 @@ exports[`renders <Name /> without throwing 1`] = `
           >
             <label
               className="c4 c5"
-              htmlFor="cfHyyk"
+              htmlFor="bOJfXP"
             >
               Name the new deployment group
             </label>
@@ -356,7 +356,7 @@ exports[`renders <Name /> without throwing 1`] = `
           </label>
           <input
             className="c7"
-            id="cfHyyk"
+            id="bOJfXP"
             name="name"
             onBlur={[Function]}
             onChange={[Function]}
@@ -735,7 +735,7 @@ exports[`renders <Name /> without throwing 2`] = `
           >
             <label
               className="c4 c5"
-              htmlFor="KxdOh"
+              htmlFor="bWgdoT"
             >
               Name the new deployment group
             </label>
@@ -747,7 +747,7 @@ exports[`renders <Name /> without throwing 2`] = `
           </label>
           <input
             className="c7"
-            id="KxdOh"
+            id="bWgdoT"
             name="name"
             onBlur={[Function]}
             onChange={[Function]}

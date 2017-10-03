@@ -81,7 +81,6 @@ export const Review = ({
   datacenter,
   ...state
 }) => {
-  console.log(datacenter);
   const serviceList = forceArray(state.services).map(({ name, config }) => (
     <ServiceCard key={name}>
       <ServiceName>{name}</ServiceName>
